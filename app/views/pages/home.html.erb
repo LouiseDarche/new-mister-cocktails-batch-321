@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="banner">
+    <h1>Welcome to Mister Cocktail</h1>
+  </div>
+  <div>
+    <% @cocktails.each do |cocktail| %>
+      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path cocktail.photo.key, height: 200, width: 200, crop: :fill %>')"><%= cocktail.name %></div>
+    <% end %>
+  </div>
+
+</div>
