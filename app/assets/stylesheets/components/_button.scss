@@ -1,0 +1,44 @@
+.btn-main {
+  padding: 6px 8px;
+  border-radius: 20px;
+  background-color: #00000047;
+  border: solid 1px $yellow;
+  color: $yellow;
+
+
+  &:hover {
+    text-decoration: none;
+    font-size: 17px;
+    transition: 0.5s;
+    color: #f9ca47;
+    border: solid 0.5px #0000006e;
+    color: #0000009c;
+    background-color: #ffffffd4;
+  }
+}
+
+
+.btn-navbar {
+  color: $yellow;
+  // background-color: #00000047;
+  text-decoration: underline;
+
+  &:hover {
+    color: #ffffffd4;
+  }
+}
+
+.btn-link {
+  padding: 6px 8px;
+  border-radius: 20px;
+  background-color: #ffffffd4;
+  border: solid 1px $yellow;
+  color: $yellow;
+
+  &:hover {
+    transform: scale(1.1, 1.1);
+    color: $yellow;
+    text-decoration: none;
+    box-shadow: 2px 2px 4px rgba(49, 26, 49, 0.3);
+  }
+}

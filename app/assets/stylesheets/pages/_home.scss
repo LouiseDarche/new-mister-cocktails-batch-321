@@ -1,1 +1,46 @@
 // Specific CSS for your home-page
+* {
+  scroll-behavior: smooth;
+}
+
+a {
+  cursor: url(drink.png) 2 2, pointer;
+}
+
+.banner {
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: -70px;
+  // padding-top: 50%;
+
+  h1 {
+    text-align: center;
+    color: #e0e0e0;
+    text-shadow: #ffffff38 1px 1px 3px;
+    margin-bottom: 5%;
+  }
+}
+
+.purple-title {
+  font-size: 2rem;
+  margin: 5%;
+  text-align: center;
+  color: $purple;
+}
+
+.flex-center {
+  margin: 5%;
+  display: flex;
+  justify-content: center;
+
+}
+

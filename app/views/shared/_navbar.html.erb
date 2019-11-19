@@ -1,0 +1,9 @@
+
+<div class="navbar">
+  <%= link_to root_path, class: "logo-link" do  %>
+    <div class="logo"><%= cl_image_tag("logo.png", width: 150) %></div>
+  <% end %>
+  <div class="right-side">
+    <%= link_to "Create a cocktail", new_cocktail_path, class: "btn-navbar" %>
+  </div>
+</div>

@@ -22,3 +22,7 @@ import { initSelect2 } from '../components/init_select2';
 
 initSelect2();
 
+import { initUpdateNavbarOnScroll } from '../components/navbar';
+
+initUpdateNavbarOnScroll();
+

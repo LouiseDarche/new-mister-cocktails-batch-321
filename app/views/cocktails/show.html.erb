@@ -1,34 +1,120 @@
-<h2><%= @cocktail.name %></h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus hic ad quidem laboriosam, libero perferendis. Quaerat harum, possimus et debitis eligendi amet! Reiciendis consequatur accusamus veniam praesentium atque minima vel?</p>
-<%= cl_image_tag @cocktail.photo.key, height: 300, width: 400, crop: :fill %>
+<div class="container">
 
-<ul>
-  <% @cocktail.doses.each do |dose| %>
-    <li><%= dose.description %> <%= dose.ingredient.name %> <%= link_to "🗑", dose_path(dose), method: :delete %> </li>
-  <% end %>
-</ul>
-<%#= link_to "Add a dose", new_cocktail_dose_path(@cocktail) %>
-<h3>Add a dose</h3>
-<%= simple_form_for [@cocktail, @dose] do |f| %>
-  <%= f.input :description %>
-  <%= f.association :ingredient, input_html: { class: 'select2' } %>
-  <%= f.submit %>
-<% end %>
+  <div class="show-card">
+    <!-- <div class="top-image"> -->
+      <%= cl_image_tag @cocktail.photo.key, height: 300, crop: :fill %>
+    <!-- </div> -->
+    <div class="line"></div>
+    <div class="bottom-text">
+      <h2 class="purple-title"><%= @cocktail.name %></h2>
+      <div class="small-line"></div>
+      <div class="flexbox">
+        <div class="ingredients">
+          🍹 <%= pluralize(@cocktail.doses.count, "ingredient") %>
+        </div>
+        <div class="description font-14">
+          <ul>
+            <% @cocktail.doses.each do |dose| %>
+              <li><%= dose.description %> <%= dose.ingredient.name %> <%= link_to "x", dose_path(dose), method: :delete, class: "red-cross" %> </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <button type="button" class="btn-link small-width" data-toggle="modal" data-target="#myModal">
+        Add a dose
+      </button>
 
-<h3>Add a review</h3>
-<%= simple_form_for [@cocktail, @review] do |f| %>
-  <%= f.input :description %>
-  <%= f.input :rating, collection: 1..5, as: :radio_buttons %>
-  <%= f.submit %>
-<% end %>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Add a dose</h4>
+            </div>
+            <div class="modal-body">
+              <%= simple_form_for [@cocktail, @dose] do |f| %>
+                <%= f.input :description %>
+                <%= f.association :ingredient, input_html: { class: 'select2' } %>
+                <%= f.submit class: "btn-link small-width" %>
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
 
-<h3>They loved it</h3>
-<ul>
-  <% @cocktail.reviews.each do |review| %>
-    <li><%= review.description %> <%= "⭐️"*review.rating %></li>
-  <% end %>
-</ul>
+    </div>
+    <div class="small-line"></div>
 
+    <div class="reviews bottom-text">
 
+      <% if @cocktail.reviews.count == 0 %>
+        <h3 class="center-title">What did you think?</h3>
+      <% else %>
+        <h3 class="center-title">They loved it!</h3>
+      <% end %>
+      <ul>
+        <% @cocktail.reviews.each do |review| %>
+          <li><%= review.description %> <%= "⭐️"*review.rating %></li>
+        <% end %>
+      </ul>
+      <button type="button" class="btn-link small-width" data-toggle="modal" data-target="#myDoseModal">
+        Add a review
+      </button>
 
-<%= link_to "Back to cocktails", cocktails_path %>
+      <!-- Modal -->
+      <div class="modal fade" id="myDoseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">Add a review</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <%= simple_form_for [@cocktail, @review] do |f| %>
+                <%= f.input :description %>
+                <fieldset class="form-group radio_buttons optional review_rating">
+                  <legend class="col-form-label pt-0">Rating</legend><input type="hidden" name="review[rating]" value="" />
+                  <div class="radio-inline">
+
+                    <div class="form-check">
+                      <input class="form-check-input radio_buttons optional" type="radio" value="1" name="review[rating]" id="review_rating_1" />
+                      <label class="form-check-label collection_radio_buttons" for="review_rating_1">1</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input radio_buttons optional" type="radio" value="2" name="review[rating]" id="review_rating_2" />
+                      <label class="form-check-label collection_radio_buttons" for="review_rating_2">2</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input radio_buttons optional" type="radio" value="3" name="review[rating]" id="review_rating_3" />
+                      <label class="form-check-label collection_radio_buttons" for="review_rating_3">3</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input radio_buttons optional" type="radio" value="4" name="review[rating]" id="review_rating_4" />
+                      <label class="form-check-label collection_radio_buttons" for="review_rating_4">4</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input radio_buttons optional" type="radio" value="5" name="review[rating]" id="review_rating_5" />
+                      <label class="form-check-label collection_radio_buttons" for="review_rating_5">5</label>
+                    </div>
+                  </div>
+                </fieldset>
+                <%= f.submit class: "btn-link small-width" %>
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= link_to "Back to cocktails", root_path, class: "secondary-link small-width" %>
+  </div>
+</div>
